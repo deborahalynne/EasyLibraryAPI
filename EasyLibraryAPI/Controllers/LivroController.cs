@@ -16,12 +16,14 @@ namespace EasyLibraryAPI.Controllers
         {
             _context = context;
         }
+
         [Route("v1/livros")]
         [HttpGet]
         public IEnumerable<Livro> Get()
         {
             return _context.Livros.AsNoTracking().ToList();
         }
+
         [Route("v1/livros/{id}")]
         [HttpGet]
         public Livro Get(int id)
@@ -29,7 +31,7 @@ namespace EasyLibraryAPI.Controllers
             return _context.Livros.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
         }
 
-        [Route("v1/livros/{id/livros")]
+        [Route("v1/livros/{id}/livros")]
         [HttpGet]
         public IEnumerable<Livro> GetLivros(int id)
         {
@@ -42,7 +44,6 @@ namespace EasyLibraryAPI.Controllers
         {
             _context.Livros.Add(livro);
             _context.SaveChanges();
-
             return livro;
         }
 

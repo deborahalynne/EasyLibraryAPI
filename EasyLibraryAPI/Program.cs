@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore;
-
+using Microsoft.Extensions.Hosting;
 
 
 namespace EasyLibraryAPI
@@ -9,14 +8,14 @@ namespace EasyLibraryAPI
     {
         public static void Main(string[] args)
         {
-            HostBuilder(args).Run();
-            /*BuildeWebHost(args).Run();*/
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost HostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .Build();
-
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
